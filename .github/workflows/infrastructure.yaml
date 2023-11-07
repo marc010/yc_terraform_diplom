@@ -26,7 +26,10 @@ jobs:
       - name: Terraform Init
         working-directory: ./terraform
         id: init
-        run: terraform init --backend-config=backend.cred
+        run: |
+          terraform init \
+            --backend-config "access_key=${{ secrets.BACKEND_CRED_ACCESS_KEY }}" \
+            --backend-config "secrte_key=${{ secrets.BACKEND_CRED_SECRET_KEY }}"
 
       - name: Terraform Plan
         working-directory: ./terraform
