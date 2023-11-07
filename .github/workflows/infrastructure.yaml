@@ -8,6 +8,8 @@ jobs:
     
     env:
       YC_TOKEN: ${{ secrets.YC_TOKEN }}
+      YC_CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
+      YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
 
     steps:
       - name: Checkout
