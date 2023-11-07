@@ -47,3 +47,11 @@ terraform init --backend-config=backend.cred
 ```
 В файле cloud_config.yaml указать публичный ssh ключ
 ```
+
+---
+
+Чтобы сгенерировать файл с инвентори для ansible можно воспользоваться скриптом [`generate_inventory.sh`](generate_inventory.sh)
+
+```bash
+./generate_inventory.sh
+```

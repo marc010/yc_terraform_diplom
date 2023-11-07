@@ -1,0 +1,14 @@
+name: infrastructureDeploy
+
+on: [push]
+
+jobs:
+  terraform-apply:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: show ls
+        run: ls -la
