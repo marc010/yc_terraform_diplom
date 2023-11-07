@@ -5,19 +5,25 @@ on: [push]
 jobs:
   terraform-apply:
     runs-on: ubuntu-latest
+    
+    env:
+      YC_TOKEN: ${{ secrets.YC_TOKEN }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set ssh-public key in cloud_config file
-        run: echo "      - ${{ secrets.SSH_PUB_KEY }}" >> ./terraform/cloud_config.yaml
+        run: echo "      - ${{ secrets.SSH_PUB_KEY }}" >> ./cloud_config.yaml
 
       - name: Set backend credentials
-        run: echo "${{ secrets.BACKEND_CRED }}" > ./terraform/backend.cred
+        run: echo "${{ secrets.BACKEND_CRED }}" > ./backend.cred
 
-      - name: show cloud_config
-        run: cat ./terraform/cloud_config.yaml
+      - name: Set Yandex Cloud Token
+        run: 
 
-      - name: show backend credentials
-        run: cat ./terraform/backend.cred
+      - uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        id: init
+        run: terraform init --backend-config=backend.cred
